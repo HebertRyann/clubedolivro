@@ -11,15 +11,27 @@
             <button class="ContainerButtonRemoved" @click=handleRemoved(book.id)>Excluir</button>
         </div>
       </div> 
-      <form class="ContainerForm" @submit.prevent="handleSubmit">
-        <h1 class="TitleForm">Cadastra Titulo</h1>
+      <div class="WrapperInfo">
+        <form class="ContainerForm" @submit.prevent="handleSubmit">
+          <h1 class="TitleForm">Cadastra Titulo</h1>
           <Input 
             v-model="bookName"
           />
           <Button content="Adicionar" class="ContainerButtonAdd" type="submit"/>
-        </form>      
-      
+        </form>  
+
+        <div class="WrapperContentReservation" >
+          <h1 class="TextReservation">Titulos Reservados</h1>
+
+          <div class="ContainerBook" v-for="bookReserve in booksReservated" :key=bookReserve.id>
+            <p class="TitleBook">{{ bookReserve.book_name }}</p>
+            <button type="button" class="ContainerButtonDelivery" @click="handleremoveReservation(bookReserve.id)">Entregar</button>
+          </div>
+        </div>          
+
+      </div> 
     </div>   
+      
   </div>
 </template>
 
@@ -43,6 +55,13 @@ export default {
         this.books = response.data;
       }
     });
+    axios.get(`http://localhost:8000/api/reserve/${this.$route.params.user}`)
+    .then(response => {
+      if(response.data) {
+        console.log(response.data, 'reserve')
+        this.booksReservated = response.data;
+      }
+    });
   },
   methods: {
     handleSubmit() {
@@ -58,6 +77,16 @@ export default {
         new Error('This already exits')        
       }
     },
+    handleremoveReservation(id) {
+      axios.delete(`http://localhost:8000/api/reserve/${id}`)
+      .then(response => {
+        this.booksReservated = response.data;
+        alert('Entrega feita com sucesso');
+      }).catch(error => {
+        if(error)
+        alert('Ocorreu um erro tente novamate');
+      }) 
+    },
     handleRemoved(id) {
       axios.delete(`http://localhost:8000/api/books/${id}`).then(response => {
         if(response.data) {
@@ -71,6 +100,7 @@ export default {
     return {
       bookName: '',
       books: [],
+      booksReservated: [],
     }
   }
 }
@@ -78,6 +108,8 @@ export default {
 
 <style scoped>
 .Container {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
   width: 100vw;
 }
@@ -173,6 +205,52 @@ export default {
   font-family: 'Roboto';
   font-weight: 400;
   font-size: 40px;
+}
+.TextReservation {
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  font-family: 'Roboto';
+  font-weight: 400;
+
+}
+.ContainerBook {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+.ContainerButtonDelivery {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  background: #0066ff;
+  height: 64px;
+  width: 150px;
+  color: #fff;
+  border: 0;
+  transition: 0.7s;
+  cursor: pointer;
+}
+.ContainerButtonDelivery:hover {
+  transform: scale(1.12);
+}
+.WrapperContentReservation {
+    display: flex;
+  flex-direction: column;
+  height: 400px;
+  width: 350px;
+  background: #fff;
+  padding: 5px 20px 20px 20px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin-top: 20px;
+  overflow: auto;
+}
+.ContainerReservation {
+background: transparent;
 }
 
 </style>

@@ -18,6 +18,8 @@ Route::post('/users', [UsersController::class, 'store'])->name('users.store');
 
 Route::get('/reserve', [ReservationController::class, 'index'])->name('reservation.index');    
 Route::post('/reserve', [ReservationController::class, 'store'])->name('reservation.store');
+Route::get('/reserve/{user}', [ReservationController::class, 'find'])->name('reservation.find');
+Route::delete('/reserve/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();

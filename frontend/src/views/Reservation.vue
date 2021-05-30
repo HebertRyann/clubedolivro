@@ -46,11 +46,15 @@ export default {
         checkout: this.checkout,
       }).then(response => {
         console.log(this.book.name, this.checkin, this.checkout)
-        console.log(response.data)
-      }).catch(error => {
-        if(error.message) {
-          alert('Ocorreu um erro tente novamente')
+        console.log(response.data, this.$route.params.user)
+        alert('Sua reserva foi feita com sucesso')
+        this.$router.push({ name: 'Dashboard', params: { user: this.$route.params.user }});
+      }).catch((error) => {
+        if(!error.message.includes('No')){
+          console.log(error.message)
+          alert('Ocorreu um erro tente novamente');
         }
+
       });
     },
   },

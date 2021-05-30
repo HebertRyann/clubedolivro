@@ -13,6 +13,20 @@ class ReservationController extends Controller
         $list_reservations = Reservation::all();
         return $list_reservations;
     }
+    public function find($user) {
+        $list_reservations = Reservation::where('user_name', '=', $user)->get();
+        return Response::json($list_reservations, 200);
+    }
+    public function destroy($id) {
+        $reserve = Reservation::where('id', '=', $id)->first();
+        if($reserve) {
+            $reserve->delete();
+            return Response::json(Reservation::all(), 204);
+            
+        } else {
+            return Response::json("This reservation cant find", 400);
+        }
+    }
 
     public function store(Request $request) {
         $start_time = Carbon::parse($request->checkin);
