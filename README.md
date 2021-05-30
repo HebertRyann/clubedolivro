@@ -6,7 +6,7 @@
 # Com o terminal aberto digite:
 
 ### yarn intall ou yarn
-## ou
+### ou
 ### npm install
 
 # Configurar o Banco de dados
