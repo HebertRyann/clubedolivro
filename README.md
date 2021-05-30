@@ -15,7 +15,7 @@
 
 # Colocando no ar
 
-### Depois de configurar voce tera que executar o comando php artesin serve para subir o servidor em php
+### Depois de configurar voce tera que executar o comando php artisan serve para subir o servidor em php
 ### navegar ate a pasta frontend e execurat yarn serve para subir o vuejs
 
 # Pronto 
