@@ -1,24 +1,21 @@
-# clubedolivro
+# Como rodar o projeto
 
-## Project setup
-```
-yarn install
-```
+## Ter um gerenciador de pacotes npm ou yarn 
+### clonar o repositorio na sua maquina e depois abri o terminal na pasta
+### com o terminal aberto de um :
+## yarn intall ou yarn
+### ou
+## npm install
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+# Configurar o Banco de dados
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## Depois de instalar todas as dependencias voce vai precisar navegar
+## ate a pasta que se chama backend e criar um arquivo .env para colocar suas 
+## variavei ambientes e conseguir se conectar com o banco de dados
 
-### Lints and fixes files
-```
-yarn lint
-```
+# Colocando no ar
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Depois de configurar voce tera que executar o comando php artesin serve para subir o servidor em php
+### navegar ate a pasta frontend e execurat yarn serve para subir o vuejs
+
+# Pronto 
